@@ -1,0 +1,27 @@
+version: '3.8'
+services:
+  database:
+    image: mongo:3.4
+    container_name: 'mongoservice'
+    ports:
+      - 27017:27017
+    expose: 
+      - 27017
+    environment:
+      - MONGO_INITDB_DATABASE=myRetail
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=admin
+    volumes:
+      - ./mongo-volume3.4:/data/db
+  myretail:
+    image: myretail:0.0.1
+    container_name: 'myretailapi'
+    ports:
+      - 8080:8080
+    expose:
+      - 8080
+  target:
+    image: targetapi:0.0.1
+    container_name: 'targetapi'
+    ports:
+      - 8081:8081
